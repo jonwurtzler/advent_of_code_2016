@@ -8,7 +8,7 @@ interface AdventOutputInterface
   /**
    * Display the Advent Day's work.
    *
-   * @return mixed
+   * @return void
    */
   public function display();
 }

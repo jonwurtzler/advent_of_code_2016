@@ -8,25 +8,7 @@
  * @date 01/04/2017
  */
 
-use Advent\AdventCoinMining;
-use Advent\AuntSue;
-use Advent\ChristmasRPG;
-use Advent\CookieRecipe;
-use Advent\ElfAccounting;
-use Advent\InfiniteElves;
-use Advent\LightsAlive;
-use Advent\LookAndSay;
-use Advent\NaughtyNiceList;
-use Advent\ReindeerMedicine;
-use Advent\ReindeerOlympics;
-use Advent\SantaDeliveries;
-use Advent\SantasPassword;
-use Advent\SleighBalance;
-use Advent\StairClimber;
-use Advent\TuringLock;
-use Advent\WizardSimulator;
-use Advent\WrappingNeeds;
-use Advent\YardGif;
+use Advent\BunnyHQ;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -34,6 +16,9 @@ $adventString = (string) isset($argv[1]) ? $argv[1] : "";
 $adventDay    = null;
 
 switch ($adventString) {
+    case 'bunny_hq':
+        $adventDay = new BunnyHQ();
+        break;
 }
 
 if (!is_null($adventDay)) {

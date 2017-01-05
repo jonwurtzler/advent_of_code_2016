@@ -18,6 +18,8 @@
   },
   "autoload-dev": {
     "classmap": [
+      "src/DataLoader.php",
+      "tests/BunnyHQTest.php"
     ]
   }
 }
