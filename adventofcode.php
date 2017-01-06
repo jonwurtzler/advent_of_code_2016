@@ -8,6 +8,7 @@
  * @date 01/04/2017
  */
 
+use Advent\BathroomCodes;
 use Advent\BunnyHQ;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -18,6 +19,10 @@ $adventDay    = null;
 switch ($adventString) {
     case 'bunny_hq':
         $adventDay = new BunnyHQ();
+        break;
+
+    case 'bathroom_code':
+        $adventDay = new BathroomCodes();
         break;
 }
 
