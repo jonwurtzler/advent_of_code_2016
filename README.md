@@ -15,7 +15,7 @@ Install the vendor dependencies with Composer:
     Current days available
     - Day 1:  Bunny Headquarters (php adventofcode.php bunny_hq)
     - Day 2:  Bathroom Codes     (php adventofcode.php bathroom_code)
-    - Day 3:  ~
+    - Day 3:  Valid Designs      (php adventofcode.php valid_design)
     - Day 4:  ~
     - Day 5:  ~
     - Day 6:  ~
