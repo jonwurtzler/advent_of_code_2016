@@ -10,6 +10,7 @@
 
 use Advent\BathroomCodes;
 use Advent\BunnyHQ;
+use Advent\RealRooms;
 use Advent\ValidDesigns;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -28,6 +29,10 @@ switch ($adventString) {
 
     case 'valid_design':
         $adventDay = new ValidDesigns();
+        break;
+
+    case 'real_room':
+        $adventDay = new RealRooms();
         break;
 }
 
