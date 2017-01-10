@@ -14,12 +14,31 @@ use DataLoader;
 //   106 => 2
 //   116 => 2
 //   etc...
+
+// Step 2: northpole object storage - 501 is the correct room
 class RealRooms
 {
     /**
      * @var string
      */
     private $dataFile = 'realRooms.txt';
+
+    /**
+     * @var string[]
+     */
+    private $realRooms = [];
+
+    /**
+     * @var int
+     */
+    private $sectorSum = 0;
+
+    /**
+     * List of rooms that have keywords.
+     *
+     * @var array
+     */
+    private $shortRoomList = [];
 
     /**
      * Display the Advent Day's work.
@@ -32,11 +51,19 @@ class RealRooms
 
         // Step 1
         $sectorSum1 = $this->findRealRooms($rooms);
-        echo (sprintf('Real Room sector sum is %d', $sectorSum1) . "\n");
+        echo (sprintf('Real Room sector sum is %d', $sectorSum1) . "\n\n");
 
         // Step 2
-        // $sectorSum2 = $this->findRealRooms($rooms);
-        // echo (sprintf('Real Room sector sum is %d', $sectorSum1) . "\n");
+        echo ("Decoded real rooms:\n");
+        echo ("Short List:\n");
+        foreach ($this->shortRoomList as $room) {
+            echo ($room . "\n");
+        }
+
+        echo ("\nFull List:\n");
+        foreach ($this->realRooms as $room) {
+            echo ($room . "\n");
+        }
     }
 
     /**
@@ -48,13 +75,11 @@ class RealRooms
      */
     public function findRealRooms($rooms)
     {
-        $sectorSum = 0;
-
         foreach ($rooms as $room) {
-            $sectorSum += $this->processRoom($room);
+            $this->sectorSum += $this->processRoom($room);
         }
 
-        return $sectorSum;
+        return $this->sectorSum;
     }
 
     /**
@@ -76,6 +101,14 @@ class RealRooms
 
         // Pass the sector if the room is valid.
         if ($this->isValidRoomName($roomName, $roomCheck)) {
+            // Decode room and store in a list.
+            $room = $this->decodeRoom($roomParts, $roomSector);
+            $this->realRooms[] = $room;
+
+            if (false !== strpos($room, 'north')) {
+                $this->shortRoomList[] = $room;
+            }
+
             return $roomSector;
         }
 
@@ -141,6 +174,45 @@ class RealRooms
         }
 
         return array_slice($topChars, 0, 5, true);
+    }
+
+    /**
+     * Decode each room using a shift cipher.
+     *   Use roomCheck as the number of times to shift up a given character.
+     *
+     * @param string[] $roomNameParts
+     * @param int      $roomSector
+     *
+     * @return string
+     */
+    private function decodeRoom($roomNameParts, $roomSector)
+    {
+        // We don't have to cycle through the entire amount of the checksum.
+        $inc   = $roomSector % 26;
+        $chars = range('a', 'z');
+        $room  = [];
+
+        // Decode each part separately then put back together.
+        foreach ($roomNameParts as $part) {
+            $word = [];
+
+            for ($i = 0; $i < strlen($part); $i++) {
+                $charPos = array_search($part[$i], $chars) + $inc;
+
+                // If higher than the full alphabet, start back at the beginning.
+                if ($charPos > 25) {
+                    $charPos -= 26;
+                }
+
+                $word[] = $chars[$charPos];
+            }
+
+            $room[] = implode($word);
+        }
+
+        $room = implode(" ", $room);
+
+        return sprintf('%s - %d', $room, $roomSector);
     }
 
 }
