@@ -5,6 +5,7 @@ namespace Advent;
 use DataLoader;
 
 // Step 1: zcreqgiv is the right code
+// Step 2: pljvorrk is the right code
 class RepetitionCodes implements AdventOutputInterface
 {
     /**
@@ -25,16 +26,21 @@ class RepetitionCodes implements AdventOutputInterface
         // Step 1
         $code1 = $this->findCode($repetitionCodes);
         echo (sprintf('Repetition Code 1 is: %s', $code1) . "\n");
+
+        // Step 2
+        $code2 = $this->findCode($repetitionCodes, true);
+        echo (sprintf('Repetition Code 2 (Advanced) is: %s', $code2) . "\n");
     }
 
     /**
      * Cycle through each row and get the most used character of each column.
      *
      * @param string[] $repetitionCodes
+     * @param bool     $step2
      *
      * @return string
      */
-    public function findCode($repetitionCodes)
+    public function findCode($repetitionCodes, $step2 = false)
     {
         $codeInfo  = [];
         $finalCode = '';
@@ -54,7 +60,12 @@ class RepetitionCodes implements AdventOutputInterface
         }
 
         foreach ($codeInfo as $colInfo) {
-            arsort($colInfo);
+            if ($step2) {
+                asort($colInfo);
+            } else {
+                arsort($colInfo);
+            }
+
             $finalCode .= key($colInfo);
         }
 
