@@ -18,7 +18,7 @@ Install the vendor dependencies with Composer:
     - Day 3:  Valid Designs      (php adventofcode.php valid_design)
     - Day 4:  Real Rooms         (php adventofcode.php real_room)
     - Day 5:  Security Door      (php adventofcode.php security_door) *Slow*
-    - Day 6:  ~
+    - Day 6:  Repetition Code    (php adventofcode.php repetition_code)
     - Day 7:  ~
     - Day 8:  ~
     - Day 9:  ~

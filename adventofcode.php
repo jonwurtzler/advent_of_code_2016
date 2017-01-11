@@ -11,6 +11,7 @@
 use Advent\BathroomCodes;
 use Advent\BunnyHQ;
 use Advent\RealRooms;
+use Advent\RepetitionCodes;
 use Advent\SecurityCode;
 use Advent\ValidDesigns;
 
@@ -38,6 +39,10 @@ switch ($adventString) {
 
     case 'security_door':
         $adventDay = new SecurityCode();
+        break;
+
+    case 'repetition_code':
+        $adventDay = new RepetitionCodes();
         break;
 
 }
